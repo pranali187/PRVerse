@@ -28,7 +28,4 @@ public class PrTeam {
 
     @OneToMany(mappedBy = "prTeam")
     private List<PrPackage> packages = new ArrayList<>();
-
-    @OneToMany(mappedBy = "prTeam")
-    private List<Review> reviews = new ArrayList<>();
 }

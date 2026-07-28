@@ -11,4 +11,6 @@ public interface UserService {
 	public List<User> getAllUsers();
 	public Optional<User> getUserByID(Long id);
 	public void deleteUserByID(Long id);
+	public void createNewUser(User user);
+	public void updateUser(long id, User user);
 }

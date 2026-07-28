@@ -33,4 +33,5 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "package_id")
     private PrPackage prPackage;
+    
 }
