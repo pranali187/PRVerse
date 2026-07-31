@@ -31,6 +31,4 @@ public class TaskProof {
     @ManyToOne
     @JoinColumn(name = "subscription_id")
     private Subscription subscription;
-
-    // Getters and Setters
 }

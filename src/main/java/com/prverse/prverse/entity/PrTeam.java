@@ -17,7 +17,6 @@ public class PrTeam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long teamId;
-
     private String teamName;
     private String description;
     private String contactEmail;
@@ -29,3 +28,4 @@ public class PrTeam {
     @OneToMany(mappedBy = "prTeam")
     private List<PrPackage> packages = new ArrayList<>();
 }
+

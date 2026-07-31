@@ -11,6 +11,11 @@ public interface PrTeamService {
 
 	Optional<PrTeam> getByName(String name);
 
-	void deletePrTeam(int id);
+	void createPrTeam(PrTeam prTeam);
 
+	Optional<PrTeam> getById(Long id);
+
+	void updatePrTeam(Long id, PrTeam prTeam);
+
+	void deletePrTeam(Long id);
 }

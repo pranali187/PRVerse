@@ -13,6 +13,8 @@ import org.springframework.web.service.annotation.PutExchange;
 
 import com.prverse.prverse.Service.UserService;
 import com.prverse.prverse.entity.User;
+import com.prverse.prverse.enums.PackageStatus;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,27 +26,32 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/Users")
+	@GetMapping
 	public List<User> getAllUsers() {
 		return userService.getAllUsers();
 	}
 	
-	@GetMapping("/id/{id}")
+	@GetMapping("/{id}")
 	public Optional<User> getUserById(@PathVariable Long id){
 		return userService.getUserByID(id);
 	}
+//	
+//	@GetMapping("/{id}/{status}")
+//	public Optional<User> getUserById(@PathVariable long id, @PathVariable PackageStatus status){
+//		return userService.getUser
+//	}
 	
-	@DeleteMapping("id/{id}")
+	@DeleteMapping("{id}")
 	public void deleteUserById(@PathVariable Long id) {
 		userService.deleteUserByID(id);
 	}
 	
-	@PostMapping("/User")
+	@PostMapping
 	public void createUser(@RequestBody User user) {
 		 userService.createNewUser(user);
 	}
 	
-	@PutMapping("/User/id/{id}")
+	@PutMapping("/{id}")
 	public void updateUser(@PathVariable long id, @RequestBody User user) {
 		
 		 userService.updateUser(id, user);

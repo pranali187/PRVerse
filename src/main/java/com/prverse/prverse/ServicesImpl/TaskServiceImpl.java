@@ -2,71 +2,59 @@ package com.prverse.prverse.ServicesImpl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.prverse.prverse.Service.TaskService;
 import com.prverse.prverse.entity.Task;
-import com.prverse.prverse.enums.TaskStatus;
+import com.prverse.prverse.repository.TaskRepository;
 
-public class TaskServiceImpl implements TaskService{
+@Service
+public class TaskServiceImpl implements TaskService {
 
-	@Override
-	public Task createTask(Task task) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Autowired
+    private TaskRepository taskRepo;
 
-	@Override
-	public List<Task> getAllTasks() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public void createTask(Task task) {
+        taskRepo.save(task);
+    }
 
-	@Override
-	public Task getTaskById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<Task> getAllTasks() {
+        return taskRepo.findAll();
+    }
 
-	@Override
-	public List<Task> getTasksByPackageId(Long packageId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Task getTaskById(Long id) {
+        return taskRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+    }
 
-	@Override
-	public Task updateTask(Long id, Task task) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public void updateTask(Long id, Task task) {
 
-	@Override
-	public Task updateTaskStatus(Long id, TaskStatus status) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        Task existingTask = getTaskById(id);
 
-	@Override
-	public Task assignTask(Long taskId, Long prTeamId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        existingTask.setTaskName(task.getTaskName());
+        existingTask.setDescription(task.getDescription());
+        existingTask.setOrderNo(task.getOrderNo());
+        existingTask.setTaskStatus(task.getTaskStatus());
+        existingTask.setPrPackage(task.getPrPackage());
 
-	@Override
-	public void deleteTask(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
+        taskRepo.save(existingTask);
+    }
 
-	@Override
-	
-	public List<Task> getTasksByStatus(TaskStatus status) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public void deleteTask(Long id) {
+        Task task = getTaskById(id);
+        taskRepo.delete(task);
+    }
 
-	@Override
-	public Double getPackageProgress(Long packageId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<Task> getTasksByPackage(Long packageId) {
+        return taskRepo.findByPrPackagePackageId(packageId);
+    }
+
 
 }

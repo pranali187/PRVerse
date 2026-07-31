@@ -10,28 +10,52 @@ import com.prverse.prverse.Service.PrTeamService;
 import com.prverse.prverse.entity.PrTeam;
 import com.prverse.prverse.repository.PrTeamRepository;
 
-
 @Service
-public class PrTeamServiceImpl implements PrTeamService{
-	@Autowired
-	public PrTeamRepository prTeamRepo;
+public class PrTeamServiceImpl implements PrTeamService {
 
-	@Override
-	public List<PrTeam> getAllPrTeams() {
-		return prTeamRepo.findAll();
-	}
+    @Autowired
+    private PrTeamRepository prRepo;
 
-	@Override
-	public Optional<PrTeam> getByName(String name) {
-		// TODO Auto-generated method stub
-		return prTeamRepo.findByTeamNameContainingIgnoreCase(name);
-	}
+    @Override
+    public void createPrTeam(PrTeam prTeam) {
+        prRepo.save(prTeam);
+    }
 
-	@Override
-	public void deletePrTeam(int id) {
-		prTeamRepo.deleteByTeamId(id);
-	}
-	
-	
+    @Override
+    public List<PrTeam> getAllPrTeams() {
+        return prRepo.findAll();
+    }
 
+    @Override
+    public Optional<PrTeam> getByName(String name) {
+        return prRepo.findByTeamName(name);
+    }
+
+    @Override
+    public Optional<PrTeam> getById(Long id) {
+        return prRepo.findById(id);
+    }
+
+    @Override
+    public void updatePrTeam(Long id, PrTeam prTeam) {
+
+        PrTeam existingTeam = prRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("PR Team not found"));
+
+        existingTeam.setTeamName(prTeam.getTeamName());
+        existingTeam.setDescription(prTeam.getDescription());
+        existingTeam.setContactEmail(prTeam.getContactEmail());
+        existingTeam.setContactPhone(prTeam.getContactPhone());
+
+        prRepo.save(existingTeam);
+    }
+
+    @Override
+    public void deletePrTeam(Long id) {
+
+        PrTeam team = prRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("PR Team not found"));
+
+        prRepo.delete(team);
+    }
 }

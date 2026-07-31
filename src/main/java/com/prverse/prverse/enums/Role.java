@@ -1,7 +1,7 @@
 package com.prverse.prverse.enums;
 
 public enum Role {
-	   USER,
-	    PR_TEAM,
-	    ADMIN
+    CLIENT,
+    PR_TEAM,
+    ADMIN
 }
