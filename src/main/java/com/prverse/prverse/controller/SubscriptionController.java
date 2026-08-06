@@ -10,6 +10,7 @@ import com.prverse.prverse.entity.Subscription;
 
 @RestController
 @RequestMapping("/subscriptions")
+@CrossOrigin(origins = "http://localhost:3000")
 public class SubscriptionController {
 
     @Autowired

@@ -10,6 +10,7 @@ import com.prverse.prverse.entity.Task;
 
 @RestController
 @RequestMapping("/tasks")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TaskController {
 
     @Autowired

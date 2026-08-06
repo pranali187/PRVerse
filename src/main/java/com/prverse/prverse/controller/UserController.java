@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/Users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -46,11 +48,11 @@ public class UserController {
 		userService.deleteUserByID(id);
 	}
 	
-	@PostMapping
-	public void createUser(@RequestBody User user) {
-		 userService.createNewUser(user);
-	}
-	
+//	@PostMapping
+//	public void createUser(@RequestBody User user) {
+//		 userService.createNewUser(user);
+//	}
+//	
 	@PutMapping("/{id}")
 	public void updateUser(@PathVariable long id, @RequestBody User user) {
 		

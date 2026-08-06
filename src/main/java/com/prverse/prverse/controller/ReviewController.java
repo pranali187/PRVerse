@@ -10,6 +10,7 @@ import com.prverse.prverse.entity.Review;
 
 @RestController
 @RequestMapping("/reviews")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ReviewController {
 
     @Autowired

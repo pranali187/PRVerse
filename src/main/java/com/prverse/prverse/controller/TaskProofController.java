@@ -10,6 +10,7 @@ import com.prverse.prverse.entity.TaskProof;
 
 @RestController
 @RequestMapping("/taskproofs")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TaskProofController {
 
     @Autowired

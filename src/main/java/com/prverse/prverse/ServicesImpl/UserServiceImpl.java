@@ -7,6 +7,7 @@ import com.prverse.prverse.repository.UserRepository;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,10 +28,18 @@ public class UserServiceImpl implements UserService {
 		userRepo.deleteById(id);
 	}
 
-	@Override
-	public void createNewUser(User user) {
-		userRepo.save(user);
-	}
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Override
+    public User createNewUser(User user) {
+
+ 	        // Encode password before saving
+ 	        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+ 	        return userRepo.save(user);
+
+    }
 
 	@Override
 	public void updateUser(long id, User user) {
@@ -42,5 +51,5 @@ public class UserServiceImpl implements UserService {
 		userRepo.save(u);
 	}
 
-
+	  
 }
