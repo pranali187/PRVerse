@@ -31,3 +31,13 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# .NET Payment Service
+**/bin/
+**/obj/
+**/.vs/
+**/*.csproj.user
+
+# Local configuration and secrets
+**/appsettings.json
+**/appsettings.Development.json
